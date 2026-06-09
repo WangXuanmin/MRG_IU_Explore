@@ -1,5 +1,7 @@
 # MRG_RL: Medical Report Generation Optimization Experiments
 
+[English](README.md) | [中文](README.zh-CN.md)
+
 This repository contains our IU X-Ray medical report generation experiments for improving report-level language overlap and clinical faithfulness.
 
 The target metrics for the final MRG model were:
