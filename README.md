@@ -32,6 +32,16 @@ Core experiment work:
 
 Large checkpoints are intentionally excluded. See `CHECKPOINTS_NOT_INCLUDED.md`.
 
+## Model Stack
+
+The main experiment stack used:
+
+- Vision encoder: `facebook/dinov2-base` / local `resources/models/facebook_dinov2-base`.
+- LLM backbone: `Qwen3-8B` / local `resources/models/Qwen3-8B`.
+- Trainable bridge: Perceiver-style visual resampler plus LoRA adapters on the LLM side.
+- Text reranking encoder: `bert-base-uncased` for candidate report embeddings in the text cross-reranker.
+- Clinical evaluation models: `CheXbert` for label F1 and `RadGraph` / ModernBERT-based RadGraph resources for entity-relation F1.
+
 ## Main Finding
 
 The central finding is that the target is reachable in the retrieved-candidate space, but not yet reachable with the deployable selectors and generators trained in this small-data setting. In other words, the bottleneck moved from "can we find a good report?" to "can the model reliably select or use that report without reference access?"

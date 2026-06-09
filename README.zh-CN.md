@@ -32,6 +32,16 @@
 
 大型 checkpoint 没有纳入仓库。详见 `CHECKPOINTS_NOT_INCLUDED.md`。
 
+## 模型栈
+
+本实验主要使用的 model stack：
+
+- Vision encoder：`facebook/dinov2-base` / 本地 `resources/models/facebook_dinov2-base`。
+- LLM backbone：`Qwen3-8B` / 本地 `resources/models/Qwen3-8B`。
+- Trainable bridge：Perceiver-style visual resampler，加上 LLM 侧 LoRA adapters。
+- Text reranking encoder：`bert-base-uncased`，用于 text cross-reranker 中的 candidate report embeddings。
+- Clinical evaluation models：`CheXbert` 用于 label F1，`RadGraph` / ModernBERT-based RadGraph resources 用于 entity-relation F1。
+
 ## 主要发现
 
 核心结论是：目标分数在 retrieved-candidate space 中是可以达到的，但在当前 small-data setting 下，deployable selector / generator 还无法稳定达到。换句话说，瓶颈已经从“能不能找到好报告”转移到“模型能不能在没有 reference 的情况下可靠地选择或使用这条报告”。
